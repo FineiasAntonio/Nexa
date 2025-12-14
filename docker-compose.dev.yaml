@@ -1,0 +1,23 @@
+version: "3.8"
+
+services:
+  database:
+    image: postgres:latest
+    container_name: nexa-database
+    environment:
+      POSTGRES_DB: nexa_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - db_data:/var/lib/postgresql
+    networks:
+      - nexa-network
+
+volumes:
+    db_data:
+
+networks:
+    nexa-network:
+      driver: bridge
