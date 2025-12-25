@@ -1,10 +1,11 @@
 CREATE TABLE client
 (
-    id       UUID NOT NULL,
-    name     VARCHAR(255),
-    document VARCHAR(255),
-    email    VARCHAR(255),
-    phone    VARCHAR(255),
+    id         UUID NOT NULL,
+    name       VARCHAR(255),
+    document   VARCHAR(255),
+    email      VARCHAR(255),
+    phone      VARCHAR(255),
+    created_at TIMESTAMP WITHOUT TIME ZONE,
     CONSTRAINT pk_client PRIMARY KEY (id)
 );
 
@@ -20,12 +21,17 @@ CREATE TABLE equipment
 
 CREATE TABLE service_order
 (
-    id           UUID    NOT NULL,
-    pulic_id     INTEGER NOT NULL,
+    id           UUID NOT NULL,
+    pulic_id     INTEGER,
     client_id    UUID,
     equipment_id UUID,
+    status       VARCHAR(255),
+    created_at   TIMESTAMP WITHOUT TIME ZONE,
     CONSTRAINT pk_serviceorder PRIMARY KEY (id)
 );
+
+ALTER TABLE service_order
+    ADD CONSTRAINT uc_serviceorder_pulicid UNIQUE (pulic_id);
 
 ALTER TABLE service_order
     ADD CONSTRAINT FK_SERVICEORDER_ON_CLIENT FOREIGN KEY (client_id) REFERENCES client (id);
