@@ -22,7 +22,7 @@ POST http://localhost:8080/service-orders
 Content-Type: application/json
 
 {
-  "existingClientId": "0000019b-5c80-2982-83dd-7b065a06b348",
+  "existingClientId": "0000019b-5ca0-6e17-aca7-2f777e70d798",
   "client": {
     "name": "Ignored",
     "document": "Ignored",

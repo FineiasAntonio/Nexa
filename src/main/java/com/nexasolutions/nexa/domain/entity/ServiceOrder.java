@@ -38,7 +38,7 @@ public class ServiceOrder {
 
     private LocalDateTime createdAt;
 
-    ServiceOrderResponseDTO toResponseDTO() {
+    public ServiceOrderResponseDTO toResponseDTO() {
         return new ServiceOrderResponseDTO(
                 this.id,
                 this.publicId,

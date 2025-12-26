@@ -20,7 +20,7 @@ public class ServiceOrderController {
     }
 
     @PostMapping
-    public ServiceOrder createServiceOrder(@RequestBody CreateServiceOrderRequestDTO request) {
+    public ServiceOrderResponseDTO createServiceOrder(@RequestBody CreateServiceOrderRequestDTO request) {
         return serviceOrderServicePort.createServiceOrder(request);
     }
 
