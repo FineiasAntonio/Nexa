@@ -48,6 +48,7 @@ public class ServiceOrderServiceAdapter implements ServiceOrderServicePort {
         ServiceOrder newServiceOrder = new ServiceOrder();
 
         newServiceOrder.setClient(client);
+        newServiceOrder.setPublicId(1);
         newServiceOrder.setEquipment(equipment);
         newServiceOrder.setStatus(ServiceOrderStatus.OPEN);
 

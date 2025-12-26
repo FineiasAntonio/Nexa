@@ -1,0 +1,38 @@
+### Create Service Order (New Client)
+POST http://localhost:8080/service-orders
+Content-Type: application/json
+
+{
+  "client": {
+    "name": "John Doe",
+    "document": "12345678900",
+    "email": "john.doe@example.com",
+    "phone": "+1234567890"
+  },
+  "equipment": {
+    "model": "Dell XPS 15",
+    "manufacturer": "Dell",
+    "serialNumber": "DXPS15-998877",
+    "comments": "Screen flickering intermittently"
+  }
+}
+
+### Create Service Order (Existing Client)
+POST http://localhost:8080/service-orders
+Content-Type: application/json
+
+{
+  "existingClientId": "0000019b-5c80-2982-83dd-7b065a06b348",
+  "client": {
+    "name": "Ignored",
+    "document": "Ignored",
+    "email": "ignored@example.com",
+    "phone": "Ignored"
+  },
+  "equipment": {
+    "model": "MacBook Pro",
+    "manufacturer": "Apple",
+    "serialNumber": "MBP-2023-001",
+    "comments": "Battery replacement"
+  }
+}

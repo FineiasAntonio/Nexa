@@ -22,7 +22,7 @@ CREATE TABLE equipment
 CREATE TABLE service_order
 (
     id           UUID NOT NULL,
-    pulic_id     INTEGER,
+    public_id    INTEGER,
     client_id    UUID,
     equipment_id UUID,
     status       VARCHAR(255),
@@ -31,7 +31,7 @@ CREATE TABLE service_order
 );
 
 ALTER TABLE service_order
-    ADD CONSTRAINT uc_serviceorder_pulicid UNIQUE (pulic_id);
+    ADD CONSTRAINT uc_serviceorder_publicid UNIQUE (public_id);
 
 ALTER TABLE service_order
     ADD CONSTRAINT FK_SERVICEORDER_ON_CLIENT FOREIGN KEY (client_id) REFERENCES client (id);
