@@ -2,7 +2,7 @@ package com.nexasolutions.nexa.infrastructure.service;
 
 import com.nexasolutions.nexa.domain.entity.Client;
 import com.nexasolutions.nexa.domain.port.ClientServicePort;
-import com.nexasolutions.nexa.infrastructure.controller.dto.request.CreateClientRequestDTO;
+import com.nexasolutions.nexa.infrastructure.application.dto.request.CreateClientRequestDTO;
 import com.nexasolutions.nexa.infrastructure.repository.ClientRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

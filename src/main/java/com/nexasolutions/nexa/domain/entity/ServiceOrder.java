@@ -1,7 +1,7 @@
 package com.nexasolutions.nexa.domain.entity;
 
 import com.nexasolutions.nexa.domain.enums.ServiceOrderStatus;
-import com.nexasolutions.nexa.infrastructure.controller.dto.response.ServiceOrderResponseDTO;
+import com.nexasolutions.nexa.infrastructure.application.dto.response.ServiceOrderResponseDTO;
 import com.nexasolutions.nexa.utils.UUIDV7;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

@@ -1,7 +1,7 @@
 package com.nexasolutions.nexa.domain.port;
 
 import com.nexasolutions.nexa.domain.entity.Client;
-import com.nexasolutions.nexa.infrastructure.controller.dto.request.CreateClientRequestDTO;
+import com.nexasolutions.nexa.infrastructure.application.dto.request.CreateClientRequestDTO;
 
 import java.util.UUID;
 

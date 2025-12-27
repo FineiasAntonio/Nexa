@@ -1,4 +1,4 @@
-package com.nexasolutions.nexa.infrastructure.controller.dto.request;
+package com.nexasolutions.nexa.infrastructure.application.dto.request;
 
 import jakarta.validation.constraints.NotBlank;
 

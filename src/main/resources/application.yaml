@@ -3,6 +3,10 @@ spring:
     name: nexa
     version: SNAPSHOT-1.0.0
 
+server:
+  servlet:
+    context-path: /api
+
 spring.datasource:
     url: jdbc:postgresql://localhost:5432/nexa_db
     username: postgres

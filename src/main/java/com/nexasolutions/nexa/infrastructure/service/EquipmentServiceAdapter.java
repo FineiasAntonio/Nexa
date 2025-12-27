@@ -2,7 +2,7 @@ package com.nexasolutions.nexa.infrastructure.service;
 
 import com.nexasolutions.nexa.domain.entity.Equipment;
 import com.nexasolutions.nexa.domain.port.EquipmentServicePort;
-import com.nexasolutions.nexa.infrastructure.controller.dto.request.CreateEquipmentRequestDTO;
+import com.nexasolutions.nexa.infrastructure.application.dto.request.CreateEquipmentRequestDTO;
 import com.nexasolutions.nexa.infrastructure.repository.EquipmentRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

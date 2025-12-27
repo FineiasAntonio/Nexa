@@ -1,4 +1,4 @@
-package com.nexasolutions.nexa.infrastructure.controller.dto.response;
+package com.nexasolutions.nexa.infrastructure.application.dto.response;
 
 import com.nexasolutions.nexa.domain.enums.ServiceOrderStatus;
 
