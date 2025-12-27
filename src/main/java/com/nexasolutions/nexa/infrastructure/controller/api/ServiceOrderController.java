@@ -4,6 +4,7 @@ import com.nexasolutions.nexa.domain.entity.ServiceOrder;
 import com.nexasolutions.nexa.domain.port.ServiceOrderServicePort;
 import com.nexasolutions.nexa.infrastructure.controller.dto.request.CreateServiceOrderRequestDTO;
 import com.nexasolutions.nexa.infrastructure.controller.dto.response.ServiceOrderResponseDTO;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,7 +21,7 @@ public class ServiceOrderController {
     }
 
     @PostMapping
-    public ServiceOrderResponseDTO createServiceOrder(@RequestBody CreateServiceOrderRequestDTO request) {
+    public ServiceOrderResponseDTO createServiceOrder(@Valid @RequestBody CreateServiceOrderRequestDTO request) {
         return serviceOrderServicePort.createServiceOrder(request);
     }
 
