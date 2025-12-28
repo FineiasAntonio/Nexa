@@ -11,6 +11,8 @@ import com.nexasolutions.nexa.infrastructure.application.dto.request.CreateServi
 import com.nexasolutions.nexa.infrastructure.application.dto.response.ServiceOrderResponseDTO;
 import com.nexasolutions.nexa.infrastructure.repository.ServiceOrderRepository;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -34,6 +36,12 @@ public class ServiceOrderServiceAdapter implements ServiceOrderServicePort {
         this.serviceOrderRepository = serviceOrderRepository;
         this.clientService = clientService;
         this.equipmentService = equipmentService;
+    }
+
+    @Override
+    public Page<ServiceOrderResponseDTO> getServiceOrders(int page, int size) {
+        Pageable pageable = Pageable.ofSize(size).withPage(page);
+        return serviceOrderRepository.findAll(pageable).map(ServiceOrder::toResponseDTO);
     }
 
     @Override

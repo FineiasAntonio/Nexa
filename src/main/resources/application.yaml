@@ -12,3 +12,9 @@ spring.datasource:
     username: postgres
     password: postgres
     driver-class-name: org.postgresql.Driver
+
+springdoc:
+    api-docs:
+      path: /docs
+    swagger-ui:
+      path: /swagger-ui.html
