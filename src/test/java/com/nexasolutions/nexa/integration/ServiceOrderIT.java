@@ -1,7 +1,7 @@
 package com.nexasolutions.nexa.integration;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.nexasolutions.nexa.infrastructure.application.dto.request.CreateClientRequestDTO;
+import com.nexasolutions.nexa.infrastructure.application.dto.request.CreateCustomerRequestDTO;
 import com.nexasolutions.nexa.infrastructure.application.dto.request.CreateEquipmentRequestDTO;
 import com.nexasolutions.nexa.infrastructure.application.dto.request.CreateServiceOrderRequestDTO;
 import com.nexasolutions.nexa.utils.ApiDefinitions;
@@ -30,7 +30,7 @@ public class ServiceOrderIT {
 
     @Test
     void shouldCreateServiceOrderWithNewClient() throws Exception {
-        var clientDto = new CreateClientRequestDTO("João Silva", "123456789", "joao@email.com", "912345678");
+        var clientDto = new CreateCustomerRequestDTO("João Silva", "123456789", "joao@email.com", "912345678");
         var equipmentDto = new CreateEquipmentRequestDTO("iPhone 13", "Apple", "SN123", "Ecrã partido");
         var request = new CreateServiceOrderRequestDTO(null, clientDto, equipmentDto);
 

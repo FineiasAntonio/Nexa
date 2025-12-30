@@ -3,21 +3,22 @@ package com.nexasolutions.nexa.domain.entity;
 import com.nexasolutions.nexa.utils.UUIDV7;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
+import java.math.BigDecimal;
 import java.util.UUID;
 
-@Entity
 @Data
-@Builder
+@Entity
 @AllArgsConstructor
 @NoArgsConstructor
-public class Client {
+@Builder
+public class Item {
 
     @Id
     @GeneratedValue(generator = "uuidv7")
@@ -25,9 +26,8 @@ public class Client {
     private UUID id;
 
     private String name;
-    private String document;
-    private String email;
-    private String phone;
+    private String SKU;
+    private int storedQuantity;
+    private BigDecimal price;
 
-    private LocalDateTime createdAt;
 }

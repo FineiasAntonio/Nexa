@@ -1,11 +1,13 @@
 package com.nexasolutions.nexa.infrastructure.service;
 
-import com.nexasolutions.nexa.domain.entity.Client;
+import com.nexasolutions.nexa.domain.entity.Customer;
 import com.nexasolutions.nexa.domain.entity.Equipment;
 import com.nexasolutions.nexa.domain.entity.ServiceOrder;
 import com.nexasolutions.nexa.domain.enums.ServiceOrderStatus;
-import com.nexasolutions.nexa.domain.port.ClientServicePort;
+import com.nexasolutions.nexa.domain.event.ServiceOrderCreatedEvent;
+import com.nexasolutions.nexa.domain.port.CustomerServicePort;
 import com.nexasolutions.nexa.domain.port.EquipmentServicePort;
+import com.nexasolutions.nexa.domain.port.MessagePublisherServicePort;
 import com.nexasolutions.nexa.domain.port.ServiceOrderServicePort;
 import com.nexasolutions.nexa.infrastructure.application.dto.request.CreateServiceOrderRequestDTO;
 import com.nexasolutions.nexa.infrastructure.application.dto.response.ServiceOrderResponseDTO;
@@ -25,17 +27,19 @@ import java.util.Optional;
 public class ServiceOrderServiceAdapter implements ServiceOrderServicePort {
 
     private final ServiceOrderRepository serviceOrderRepository;
-    private final ClientServicePort clientService;
+    private final CustomerServicePort customerService;
     private final EquipmentServicePort equipmentService;
+    private final MessagePublisherServicePort messagePublisherServicePort;
 
     public ServiceOrderServiceAdapter(
             ServiceOrderRepository serviceOrderRepository,
-            ClientServicePort clientService,
-            EquipmentServicePort equipmentService
-    ) {
+            CustomerServicePort customerService,
+            EquipmentServicePort equipmentService,
+            MessagePublisherServicePort messagePublisherServicePort) {
         this.serviceOrderRepository = serviceOrderRepository;
-        this.clientService = clientService;
+        this.customerService = customerService;
         this.equipmentService = equipmentService;
+        this.messagePublisherServicePort = messagePublisherServicePort;
     }
 
     @Override
@@ -48,12 +52,12 @@ public class ServiceOrderServiceAdapter implements ServiceOrderServicePort {
     @Transactional
     public ServiceOrderResponseDTO createServiceOrder(CreateServiceOrderRequestDTO request) {
 
-        Client client;
+        Customer customer;
 
-        if (request.existingClientId() != null) {
-            client = clientService.getClientById(request.existingClientId());
+        if (request.existingCustomerId() != null) {
+            customer = customerService.getCustomerById(request.existingCustomerId());
         } else {
-            client = clientService.createClient(request.client());
+            customer = customerService.createCustomer(request.customer());
         }
 
         Equipment equipment = equipmentService.createEquipment(request.equipment());
@@ -62,7 +66,7 @@ public class ServiceOrderServiceAdapter implements ServiceOrderServicePort {
 
         newServiceOrder.setPublicId(generatePublicId());
 
-        newServiceOrder.setClient(client);
+        newServiceOrder.setCustomer(customer);
         newServiceOrder.setCreatedAt(LocalDateTime.now());
         newServiceOrder.setEquipment(equipment);
         newServiceOrder.setStatus(ServiceOrderStatus.OPEN);
@@ -70,7 +74,21 @@ public class ServiceOrderServiceAdapter implements ServiceOrderServicePort {
         newServiceOrder = serviceOrderRepository.save(newServiceOrder);
 
         log.info("New service order created: {}", newServiceOrder.getPublicId());
-        return newServiceOrder.toResponseDTO();
+
+        try {
+            ServiceOrderCreatedEvent event = ServiceOrderCreatedEvent.builder()
+                    .serviceOrderPublicId(newServiceOrder.getPublicId())
+                    .customerName(customer.getName())
+                    .customerEmail(customer.getEmail())
+                    .customerPhone(customer.getPhone())
+                    .build();
+            messagePublisherServicePort.publish(event);
+        } catch (Exception e) {
+            log.error("Failed to create notification: {}", e.getMessage());
+            return newServiceOrder.toResponseDTO(false);
+        }
+
+        return newServiceOrder.toResponseDTO(true);
     }
 
     private int generatePublicId() {

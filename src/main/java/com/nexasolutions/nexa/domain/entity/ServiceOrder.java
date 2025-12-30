@@ -28,7 +28,7 @@ public class ServiceOrder {
     private int publicId;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    private Client client;
+    private Customer customer;
 
     @OneToOne(cascade = CascadeType.PERSIST)
     private Equipment equipment;
@@ -43,7 +43,18 @@ public class ServiceOrder {
                 this.id,
                 this.publicId,
                 this.status,
-                this.createdAt
+                this.createdAt,
+                false
+        );
+    }
+
+    public ServiceOrderResponseDTO toResponseDTO(boolean notificationSent) {
+        return new ServiceOrderResponseDTO(
+                this.id,
+                this.publicId,
+                this.status,
+                this.createdAt,
+                notificationSent
         );
     }
 

@@ -15,9 +15,25 @@ services:
     networks:
       - nexa-network
 
+  message-broker:
+    image: 'rabbitmq:management'
+    container_name: 'nexa-message-broker'
+    environment:
+      - 'RABBITMQ_DEFAULT_PASS=admin'
+      - 'RABBITMQ_DEFAULT_USER=admin'
+    ports:
+      - '5672:5672'
+      - '15672:15672'
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
+    networks:
+      - nexa-network
+
 volumes:
-    db_data:
+  db_data:
+  rabbitmq_data:
+
 
 networks:
-    nexa-network:
-      driver: bridge
+  nexa-network:
+    driver: bridge

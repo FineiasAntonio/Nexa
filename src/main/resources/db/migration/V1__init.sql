@@ -1,4 +1,4 @@
-CREATE TABLE client
+CREATE TABLE customer
 (
     id         UUID NOT NULL,
     name       VARCHAR(255),
@@ -23,7 +23,7 @@ CREATE TABLE service_order
 (
     id           UUID NOT NULL,
     public_id    INTEGER,
-    client_id    UUID,
+    customer_id  UUID,
     equipment_id UUID,
     status       VARCHAR(255),
     created_at   TIMESTAMP WITHOUT TIME ZONE,
@@ -34,7 +34,7 @@ ALTER TABLE service_order
     ADD CONSTRAINT uc_serviceorder_publicid UNIQUE (public_id);
 
 ALTER TABLE service_order
-    ADD CONSTRAINT FK_SERVICEORDER_ON_CLIENT FOREIGN KEY (client_id) REFERENCES client (id);
+    ADD CONSTRAINT FK_SERVICEORDER_ON_CUSTOMER FOREIGN KEY (customer_id) REFERENCES customer (id);
 
 ALTER TABLE service_order
     ADD CONSTRAINT FK_SERVICEORDER_ON_EQUIPMENT FOREIGN KEY (equipment_id) REFERENCES equipment (id);

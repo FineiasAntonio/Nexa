@@ -3,7 +3,7 @@ package com.nexasolutions.nexa.infrastructure.application.dto.request;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 
-public record CreateClientRequestDTO(
+public record CreateCustomerRequestDTO(
         @NotBlank
         String name,
         @NotBlank

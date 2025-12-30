@@ -5,9 +5,9 @@ import jakarta.validation.constraints.NotNull;
 import java.util.UUID;
 
 public record CreateServiceOrderRequestDTO(
-        UUID existingClientId,
+        UUID existingCustomerId,
         @NotNull
-        CreateClientRequestDTO client,
+        CreateCustomerRequestDTO customer,
         @NotNull
         CreateEquipmentRequestDTO equipment
 ) {
