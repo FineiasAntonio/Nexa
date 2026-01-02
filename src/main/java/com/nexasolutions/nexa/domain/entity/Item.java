@@ -3,7 +3,6 @@ package com.nexasolutions.nexa.domain.entity;
 import com.nexasolutions.nexa.utils.UUIDV7;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

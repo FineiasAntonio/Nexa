@@ -7,6 +7,6 @@ import java.time.LocalDateTime;
 @Getter
 public abstract class Event {
 
-    private LocalDateTime timestamp = LocalDateTime.now();
+    private final LocalDateTime timestamp = LocalDateTime.now();
 
 }
