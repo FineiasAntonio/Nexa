@@ -13,11 +13,11 @@
         </appender>
 
         <appender name="FILE_DEV" class="ch.qos.logback.core.rolling.RollingFileAppender">
-            <file>logs/app-dev.log</file>
+            <file>logs/api_dev.log</file>
 
             <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-                <fileNamePattern>logs/app-dev.%d{yyyy-MM-dd}.log</fileNamePattern>
-                <maxHistory>7</maxHistory>
+                <fileNamePattern>logs/api_dev.%d{yyyy-MM-dd}.log</fileNamePattern>
+                <maxHistory>3</maxHistory>
             </rollingPolicy>
 
             <encoder>
